@@ -3,6 +3,7 @@
 Docker ist eine Plattform, mit der man Anwendungen in sogenannten Containern entwickeln, bereitstellen und ausführen kann. Die Container sind einfach, schnell und unabhängig vom System, auf dem sie laufen.
 
 ### Hauptmerkmale
+
 - Containerisierung
 - Portabilität
 - Skalierbarkeit
@@ -13,16 +14,19 @@ Docker ist eine Plattform, mit der man Anwendungen in sogenannten Containern ent
 ## Installation
 
 ### Windows
+
 1. [Docker Desktop für Windows](https://www.docker.com/products/docker-desktop) herunterladen
 2. Installationsassistent ausführen
 3. Nach der Installation neu starten
 
 ### macOS
+
 1. [Docker Desktop für Mac](https://www.docker.com/products/docker-desktop) herunterladen
 2. Installationsassistent ausführen
 3. Docker.app starten
 
 ### Linux
+
 ```bash
 # Ubuntu/Debian
 sudo apt-get update
@@ -35,16 +39,19 @@ sudo dnf install docker-ce docker-ce-cli containerd.io
 ## Grundlegende Konzepte
 
 ### Images
+
 - Basis für Container
 - Werden aus Dockerfiles erstellt
 - Können in Registries geteilt werden
 
 ### Container
+
 - Laufende Instanz eines Images
 - Isolierte Umgebung
 - Eigene Dateisysteme und Netzwerke
 
 ### Dockerfile
+
 - Textdatei mit Anweisungen
 - Definiert den Build-Prozess
 - Bestimmt die Container-Umgebung
@@ -52,6 +59,7 @@ sudo dnf install docker-ce docker-ce-cli containerd.io
 ## Erste Schritte
 
 ### Image erstellen
+
 ```dockerfile
 # Dockerfile
 FROM node:14-alpine
@@ -64,11 +72,13 @@ CMD ["npm", "start"]
 ```
 
 ### Image bauen
+
 ```bash
 docker build -t meine-app .
 ```
 
 ### Container starten
+
 ```bash
 docker run -p 3000:3000 meine-app
 ```
@@ -76,6 +86,7 @@ docker run -p 3000:3000 meine-app
 ## Häufige Befehle
 
 ### Images verwalten
+
 ```bash
 # Images auflisten
 docker images
@@ -88,6 +99,7 @@ docker rmi nginx
 ```
 
 ### Container verwalten
+
 ```bash
 # Laufende Container anzeigen
 docker ps
@@ -104,6 +116,7 @@ docker rm container_id
 ```
 
 ### Logs und Status
+
 ```bash
 # Logs anzeigen
 docker logs container_id
@@ -115,8 +128,9 @@ docker stats
 ## Docker Compose
 
 ### docker-compose.yml
+
 ```yaml
-version: '3'
+version: "3"
 services:
   web:
     build: .
@@ -133,6 +147,7 @@ services:
 ```
 
 ### Compose-Befehle
+
 ```bash
 # Services starten
 docker-compose up
@@ -147,11 +162,13 @@ docker-compose down
 ## Volumes
 
 ### Volume erstellen
+
 ```bash
 docker volume create mein-volume
 ```
 
 ### Volume mounten
+
 ```bash
 docker run -v mein-volume:/data nginx
 ```
@@ -159,11 +176,13 @@ docker run -v mein-volume:/data nginx
 ## Netzwerke
 
 ### Netzwerk erstellen
+
 ```bash
 docker network create mein-netzwerk
 ```
 
 ### Container im Netzwerk
+
 ```bash
 docker run --network mein-netzwerk nginx
 ```
@@ -171,18 +190,21 @@ docker run --network mein-netzwerk nginx
 ## Best Practices
 
 ### Image-Optimierung
+
 - Kleine Basis-Images verwenden
 - Multi-Stage Builds nutzen
 - Unnötige Layer vermeiden
 - .dockerignore verwenden
 
 ### Sicherheit
+
 - Nicht als root laufen
 - Regelmäßige Updates
 - Minimale Berechtigungen
 - Secrets sicher handhaben
 
 ### Performance
+
 - Caching nutzen
 - Ressourcenlimits setzen
 - Effiziente Layer-Struktur
@@ -191,6 +213,7 @@ docker run --network mein-netzwerk nginx
 ## Debugging
 
 ### Container untersuchen
+
 ```bash
 # Shell im Container öffnen
 docker exec -it container_id sh
@@ -200,6 +223,7 @@ docker inspect container_id
 ```
 
 ### Logs analysieren
+
 ```bash
 # Logs filtern
 docker logs container_id | grep error
@@ -211,16 +235,19 @@ docker logs -f container_id
 ## Deployment
 
 ### Image taggen
+
 ```bash
 docker tag meine-app:latest registry.example.com/meine-app:1.0
 ```
 
 ### Image pushen
+
 ```bash
 docker push registry.example.com/meine-app:1.0
 ```
 
 ## Ressourcen
+
 - [Offizielle Dokumentation](https://docs.docker.com/)
 - [Docker Hub](https://hub.docker.com/)
 - [Dockerfile Referenz](https://docs.docker.com/engine/reference/builder/)
@@ -229,6 +256,7 @@ docker push registry.example.com/meine-app:1.0
 ## Cheatsheet
 
 ### Container Management
+
 ```bash
 # Container starten
 docker start <container_id>
@@ -259,6 +287,7 @@ docker run -v /host/path:/container/path <image>
 ```
 
 ### Image Management
+
 ```bash
 # Images auflisten
 docker images
@@ -283,6 +312,7 @@ docker push <image>
 ```
 
 ### Docker Compose
+
 ```bash
 # Services starten
 docker-compose up
@@ -304,6 +334,7 @@ docker-compose up <service>
 ```
 
 ### Netzwerke
+
 ```bash
 # Netzwerke auflisten
 docker network ls
@@ -319,6 +350,7 @@ docker network inspect <network>
 ```
 
 ### Volumes
+
 ```bash
 # Volumes auflisten
 docker volume ls
@@ -334,6 +366,7 @@ docker volume rm <volume>
 ```
 
 ### Logs & Monitoring
+
 ```bash
 # Container-Logs
 docker logs <container_id>
@@ -352,6 +385,7 @@ docker top <container_id>
 ```
 
 ### Dockerfile Befehle
+
 ```dockerfile
 FROM        # Basis-Image
 WORKDIR     # Arbeitsverzeichnis
@@ -367,6 +401,7 @@ VOLUME      # Volume definieren
 ```
 
 ### Häufige Kombinationen
+
 ```bash
 # Entwicklung mit Hot-Reload
 docker run -v $(pwd):/app -p 3000:3000 <image>
@@ -385,6 +420,7 @@ docker run --memory="1g" --cpus="1" <image>
 ```
 
 ### Troubleshooting
+
 ```bash
 # Container-Logs filtern
 docker logs <container_id> | grep error
@@ -397,4 +433,4 @@ docker exec <container_id> ping <host>
 
 # Speicherplatz bereinigen
 docker system prune -a
-``` 
+```

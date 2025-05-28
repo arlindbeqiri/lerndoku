@@ -3,6 +3,7 @@
 TypeORM ist ein Object-Relational Mapping (ORM) Framework für TypeScript und JavaScript, das mit verschiedenen Datenbanken arbeitet. Es ermöglicht die Arbeit mit Datenbanken auf einer höheren Abstraktionsebene durch die Verwendung von Klassen und Objekten.
 
 ### Hauptmerkmale
+
 - TypeScript und JavaScript Unterstützung
 - Unterstützung für verschiedene Datenbanken
 - Entity-basierte Entwicklung
@@ -20,6 +21,7 @@ npm install @types/node --save-dev
 ## Grundlegende Konfiguration
 
 1. **tsconfig.json**:
+
 ```json
 {
   "compilerOptions": {
@@ -30,6 +32,7 @@ npm install @types/node --save-dev
 ```
 
 2. **ormconfig.json**:
+
 ```json
 {
   "type": "sqlite",
@@ -52,17 +55,17 @@ import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
 @Entity()
 export class User {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    firstName: string;
+  @Column()
+  firstName: string;
 
-    @Column()
-    lastName: string;
+  @Column()
+  lastName: string;
 
-    @Column()
-    age: number;
+  @Column()
+  age: number;
 }
 ```
 
@@ -72,14 +75,17 @@ export class User {
 import "reflect-metadata";
 import { createConnection } from "typeorm";
 
-createConnection().then(async connection => {
+createConnection()
+  .then(async (connection) => {
     // Hier kann mit der Datenbank gearbeitet werden
-}).catch(error => console.log(error));
+  })
+  .catch((error) => console.log(error));
 ```
 
 ## CRUD-Operationen
 
 ### Erstellen
+
 ```typescript
 const user = new User();
 user.firstName = "Arlind";
@@ -89,12 +95,14 @@ await connection.manager.save(user);
 ```
 
 ### Lesen
+
 ```typescript
 const users = await connection.manager.find(User);
 const user = await connection.manager.findOne(User, 1);
 ```
 
 ### Aktualisieren
+
 ```typescript
 const user = await connection.manager.findOne(User, 1);
 user.age = 26;
@@ -102,6 +110,7 @@ await connection.manager.save(user);
 ```
 
 ### Löschen
+
 ```typescript
 await connection.manager.delete(User, 1);
 ```
@@ -111,23 +120,23 @@ await connection.manager.delete(User, 1);
 ```typescript
 @Entity()
 export class Photo {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    url: string;
+  @Column()
+  url: string;
 
-    @ManyToOne(type => User, user => user.photos)
-    user: User;
+  @ManyToOne((type) => User, (user) => user.photos)
+  user: User;
 }
 
 @Entity()
 export class User {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @OneToMany(type => Photo, photo => photo.user)
-    photos: Photo[];
+  @OneToMany((type) => Photo, (photo) => photo.user)
+  photos: Photo[];
 }
 ```
 
@@ -138,6 +147,7 @@ typeorm migration:create -n CreateUsersTable
 ```
 
 ## Best Practices
+
 - Entities sauber strukturieren
 - Indexes für Performance
 - Caching nutzen
@@ -145,11 +155,13 @@ typeorm migration:create -n CreateUsersTable
 - Fehlerbehandlung implementieren
 
 ## Debugging
+
 - Logging aktivieren
 - Query Builder nutzen
 - SQL-Ausgaben überprüfen
 
 ## Ressourcen
+
 - [Offizielle Dokumentation](https://typeorm.io/)
 - [GitHub Repository](https://github.com/typeorm/typeorm)
-- [Beispiele](https://github.com/typeorm/typeorm/tree/master/sample) 
+- [Beispiele](https://github.com/typeorm/typeorm/tree/master/sample)
